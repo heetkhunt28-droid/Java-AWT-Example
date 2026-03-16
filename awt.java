@@ -1,84 +1,45 @@
-//Java AWT Program
-/*To Compile: write the next 2 commands in your CMD
-	javac awt.java
-	java Main
-*/
-
 import java.awt.*;
 import java.awt.event.*;
-public class awt implements ActionListener{
-	TextField t = new TextField();
-	TextField t1 = new TextField();
-	Choice c = new Choice();
-	Label submit = new Label("Registration Successful");
-	Frame f = new Frame();
-	MenuBar mb = new MenuBar();
-	Menu m = new Menu("Menu");
-	Label l = new Label("Name");
-	Label l1 = new Label("Pasword: ");
-	Label l2 = new Label("Occupation");
-	Button s = new Button("Submit");
-	Button clr = new Button("Clear");
-	awt(){
-		//Frame Layout
-		f.setSize(400,400);
-		f.setVisible(true);
-		f.setLayout(null);
-		f.setTitle("Registration Form");
-		//End of Layout
-		//Menu
-		m.add("File");
-		m.add("Edit");
-		mb.add(m);
-		f.setMenuBar(mb);
-		//End of Menu
-		//First Row : Name and TextField for name
-		l.setBounds(50,100, 100,30);
-		f.add(l);
-		t.setBounds(170,100, 100,30);
-		f.add(t);
-		//End of row 1
-		//row 1
-		l1.setBounds(50,170, 100,30);
-		t1.setEchoChar('*');					//Displays * for every char entered in input
-		t1.setBounds(170,170, 100,30);
-		f.add(l1);
-		f.add(t1);
-		//End of row 2
-		//Choice Row 3
-		l2.setBounds(50,220, 100,30);
-		c.add("Engineer");
-		c.add("Doctor");
-		c.setBounds(170,220, 100,30);
-		f.add(l2);
-		f.add(c);
-		//End of Choice row
-		s.setBounds(50,280, 100,30);
-		s.addActionListener(this);			//Important: this will add a functionality to the button
-		clr.setBounds(170,280,100,30);		
-		clr.addActionListener(this);
-		f.add(s);
-		f.add(clr);
-		submit.setBounds(50,330, 200,30);
-		f.add(submit);
-		submit.setVisible(false);
-	}
-	public void actionPerformed(ActionEvent e){
-		if (e.getSource() == s){			//Submit Button Pressed
-			submit.setVisible(true);
-			submit.setText("Name ="+t.getText() +" Occupation ="+c.getSelectedItem());
-		}
-		else{							//Clear Button Press
-			t.setText(" ");				//This needs to be done to due to a bug
-			t.setText("");
-			t1.setText(" ");
-			t1.setText("");
-			c.select(0);				//Selects the first option of choice on clearing screen
-			submit.setVisible(false);
-		}
-	}
+
+public class AWTExample {
+    public static void main(String[] args) {
+        // Create the frame
+        Frame f = new Frame("AWT Example");
+
+        // Create the Label
+        Label l = new Label("Krushangi Khunt");
+        l.setBounds(20, 50, 150, 30);
+
+        // Create the TextField (made slightly narrow to recreate the scrolled text effect in your image)
+        TextField tf = new TextField("Krushangi Khunt");
+        tf.setBounds(180, 50, 70, 30);
+
+        // Create the Button
+        Button b = new Button("Show Text");
+        b.setBounds(260, 50, 80, 30);
+
+        // Add action listener to the button so it updates the label
+        b.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                l.setText(tf.getText());
+            }
+        });
+
+        // Add window listener to properly close the application
+        f.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent we) {
+                System.exit(0);
+            }
+        });
+
+        // Add components to the frame
+        f.add(l);
+        f.add(tf);
+        f.add(b);
+
+        // Set frame properties
+        f.setSize(380, 150);
+        f.setLayout(null); // Using no layout manager to position via coordinates
+        f.setVisible(true);
+    }
 }
-class Main{
-public static void main(String Z[]){
-	awt a = new awt();
-}}
